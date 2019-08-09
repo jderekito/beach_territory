@@ -188,14 +188,20 @@
                         iconSize: [50, 50],
                         html: '<span></span>'
                         });
-                                               
+                      
+					  //add id to marker icon for later usemap
+					  //https://stackoverflow.com/questions/9132837/jquery-javascript-add-id-to-a-div-where-class-x
+					  $('div.leaflet-marker-pane').attr('id', 'map_marker');
+					  
                       var notifyMarker = L.marker([thisLat,thisLon], {icon: notifyIcon})
                       buildingLayers.addLayer(notifyMarker);
                       
                       if(map.getSize().x < 768){
                         $('#toolbar').removeClass('open');
                       }
-                      thisLayer.on('click', function(e){
+                      //Generalize the click to the icon
+					  //https://api.jquery.com/click/
+					  $('#map_marker').click(function(e) {
                         //map.setView(e.latlng, 13);
                         var url = 'images/' + thisLayer.feature.properties.IMAGE;
                         $('#dialog').dialog({resizable:true,height:500,width:600});
@@ -205,6 +211,7 @@
                         if (thisLayer.feature.properties.URL != null){
                             $("#dialog").append("<center><a href='"+thisLayer.feature.properties.URL+"' target='_blank'>Link</a></center>");
                         }
+						return false;
                       });
                     });
                   }
