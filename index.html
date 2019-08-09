@@ -74,7 +74,8 @@
               right: 0px;
               transform: rotate(90deg);
               top: 39px;
-              left: -21px;
+              left: -11px;
+			  font-size: large;
             }
 
             #events {
@@ -126,7 +127,10 @@
                 $('#toolbar .cartograpy').on('click', function() {
                   $(this).parent().toggleClass('open');
                 });
-								
+					
+				//default open
+				$('#toolbar .cartograpy').parent().toggleClass('open');
+				
                 $( "#dialog" ).dialog({
                     autoOpen: false,
                     resizable: false,
@@ -211,10 +215,10 @@
         <div id="mapwrap">
           <div id="toolbar">
             <div class="cartograpy">
-              <span>Beaches</span>
+              <span>Menu</span>
             </div>
             <div id="events">
-              <h2>Beaches</h2>
+              <h2>Menu</h2>
               <ul>
               </ul>
             </div>
