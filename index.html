@@ -50,12 +50,13 @@
             #toolbar.open {
               left: 0;
               opacity: .95;
+			  width: fit-content;
             }
 
             #toolbar .cartograpy {
               height: 100px;
               width: 25px;
-              background: #000;
+              background: #31f8f2;;
               box-shadow: 1px 0 2px rgba(0, 0, 0, .3);
               position: absolute;
               right: -25px;
@@ -67,7 +68,7 @@
             }
 
             .cartograpy span {
-              color: #fff;
+              color: #0a0a0a;
               display: inline-block;
               position: relative;
               right: 0px;
@@ -125,7 +126,7 @@
                 $('#toolbar .cartograpy').on('click', function() {
                   $(this).parent().toggleClass('open');
                 });
-                
+								
                 $( "#dialog" ).dialog({
                     autoOpen: false,
                     resizable: false,
@@ -136,49 +137,31 @@
                   zoomControl: false
                 });
                 
-                //var mapTiles = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                //  maxZoom: 19,
-                //  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                //});
-                
-                
-                //http://maps.stamen.com/
-                //var mapTiles = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
-                //  maxZoom: 19,
-                //  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                //});
+				var tnmBasemapViewer = L.tileLayer('http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+				maxZoom: 14,
+				attribution: "U.S. Department of the Interior"
+				});
 
-                //mapTiles.addTo(map);
-                
-                //new L.Control.Zoom({
-                //  position: 'topright'
-                //}).addTo(map);
+				var fancyBasemap = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
+				  maxZoom: 19,
+				  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+				});
 
-                        var tnmBasemapViewer = L.tileLayer('http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
-                        maxZoom: 14,
-                        attribution: "U.S. Department of the Interior"
-                        });
+				// Add baselayers and overlays to groups
+				var baseLayers = {
+					"Get Fancy" : fancyBasemap,
+					"The National Map (Viewer)" : tnmBasemapViewer,
+				};
 
-                        var fancyBasemap = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
-                          maxZoom: 19,
-                          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                        });
+				var controlLayers = L.control.layers(baseLayers);
 
-                        // Add baselayers and overlays to groups
-                        var baseLayers = {
-                            "Get Fancy" : fancyBasemap,
-                            "The National Map (Viewer)" : tnmBasemapViewer,
-                        };
+				// Add the main baselayer to the map as a default (so it loads when the map
+				// is loaded
+				fancyBasemap.addTo(map);
+				//tnmBasemapViewer.addTo(map);
 
-                        var controlLayers = L.control.layers(baseLayers);
-
-                        // Add the main baselayer to the map as a default (so it loads when the map
-                        // is loaded
-                        tnmBasemapViewer.addTo(map);
-                        //fancyBasemap.addTo(map);
-
-                        // Add the layer selector control to the map
-                        controlLayers.addTo(map);                
+				// Add the layer selector control to the map
+				controlLayers.addTo(map);                
                 map.setView([28.259141, -83.305150], 7);
                 
                 var buildingLayers = L.layerGroup().addTo(map);
@@ -228,7 +211,7 @@
         <div id="mapwrap">
           <div id="toolbar">
             <div class="cartograpy">
-              <span>&nbsp;&nbsp;Beaches</span>
+              <span>Beaches</span>
             </div>
             <div id="events">
               <h2>Beaches</h2>
