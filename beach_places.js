@@ -22,8 +22,7 @@ var bldgData = {
 			"properties" : {
 				"NAME" : "Wayside Park - Okaloosa Island",
 				"BODY" : "Babylonians believed to the first to make a map or attempt to map their world. This world map dates from about 600 B.C. Here Mesopotamia is in the center of the world, and an ocean lies at the margins of the known land areas. This area is considered the cradle area of western civilization including Sumer, Babylonian and Assyrian empires.",
-                "IMAGE" : "firstworldmap.jpg",
-				"IMAGE" : "firstworldmap.jpg"
+                "IMAGE" : "firstworldmap.jpg"
 			},
 			"type" : "Feature"
 		}           

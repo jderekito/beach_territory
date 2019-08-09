@@ -147,6 +147,11 @@
 				attribution: "U.S. Department of the Interior"
 				});
 
+				var osmBasemapViewer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 14,
+				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				});
+				
 				var fancyBasemap = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
 				  maxZoom: 19,
 				  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -156,14 +161,16 @@
 				var baseLayers = {
 					"Get Fancy" : fancyBasemap,
 					"The National Map (Viewer)" : tnmBasemapViewer,
+					"OpenStreetMap" : osmBasemapViewer
 				};
 
 				var controlLayers = L.control.layers(baseLayers);
 
 				// Add the main baselayer to the map as a default (so it loads when the map
 				// is loaded
-				fancyBasemap.addTo(map);
-				//tnmBasemapViewer.addTo(map);
+				//fancyBasemap.addTo(map);
+				tnmBasemapViewer.addTo(map);
+				//osmBasemapViewer.addTo(map);
 
 				// Add the layer selector control to the map
 				controlLayers.addTo(map);                
@@ -202,7 +209,9 @@
                       //Generalize the click to the icon
 					  //https://api.jquery.com/click/
 					  $('#map_marker').click(function(e) {
-                        //map.setView(e.latlng, 13);
+					    var latlng = map.mouseEventToLatLng(e.originalEvent);
+					    //console.log(latlng.lat + ', ' + latlng.lng);
+                        map.setView([latlng.lat, latlng.lng], 10);
                         var url = 'images/' + thisLayer.feature.properties.IMAGE;
                         $('#dialog').dialog({resizable:true,height:500,width:600});
                         $('#dialog').dialog('open').text(thisLayer.feature.properties.BODY);
