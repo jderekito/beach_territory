@@ -190,6 +190,7 @@
                       buildingLayers.clearLayers(); // remove existing markers
                       var thisLat = thisLayer.feature.geometry.coordinates[1];
                       var thisLon = thisLayer.feature.geometry.coordinates[0];
+					  map.setView([thisLat, thisLon], 10);
                       map.panTo([thisLat,thisLon]);
                       //thisLayer.addTo(map);
                       buildingLayers.addLayer(thisLayer);
@@ -212,11 +213,10 @@
                       //Generalize the click to the icon
 					  //https://api.jquery.com/click/
 					  $('#map_marker').click(function(e) {
-					    var latlng = map.mouseEventToLatLng(e.originalEvent);
-					    //console.log(latlng.lat + ', ' + latlng.lng);
-                        map.setView([latlng.lat, latlng.lng], 10);
-                        var url = 'images/' + thisLayer.feature.properties.IMAGE;
-                        $('#dialog').dialog({resizable:true,height:500,width:600});
+					    //var latlng = map.mouseEventToLatLng(e.originalEvent);
+                        //map.setView([latlng.lat, latlng.lng], 10);
+                        var url = 'pics/' + thisLayer.feature.properties.IMAGE;
+                        $('#dialog').dialog({resizable:true,height:500,width:500});
                         $('#dialog').dialog('open').text(thisLayer.feature.properties.BODY);
                         $('#dialog').dialog('option', 'title', thisLayer.feature.properties.NAME)
                         $("#dialog").append("<center><img src='"+url+"' id='myNewImage' /></center>");
