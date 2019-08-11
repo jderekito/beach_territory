@@ -125,7 +125,10 @@
         </style>
         <script>
             $(document).ready(function () {
-                $('#toolbar .cartograpy').on('click', function() {
+                //roll the credits:
+				$( "#credits_dialog" ).dialog();
+				
+				$('#toolbar .cartograpy').on('click', function() {
                   $(this).parent().toggleClass('open');
                 });
 					
@@ -245,5 +248,17 @@
           </div>
         </div>
         <script src="beach_places.js"></script>
+		<div id="credits_dialog" title="About">
+			<h3>This project is a UWF collaboration with 
+				contribution from the following scholars:</h3>
+			<ul style="list-style-type:disc;">
+			  <li>Jocelyn Evans</li>
+			  <li>Derek Morgan</li>
+			  <li>K Yoland</li>
+			  <li>Elizabeth Barett</li>
+			  <li>...</li>
+			  <li>...</li>
+			</ul>				
+		</div>
     </body>
 </html>
