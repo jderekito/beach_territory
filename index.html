@@ -165,18 +165,13 @@
 					subdomains:['mt0','mt1','mt2','mt3']
 				});
 
-				googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-					maxZoom: 20,
-					subdomains:['mt0','mt1','mt2','mt3']
-				});
 				
 				// Add baselayers and overlays to groups
 				var baseLayers = {
 					"Get Fancy" : fancyBasemap,
 					"OpenStreetMap" : osmBasemapViewer, 
 					"Google Streets" : googleStreets,
-					"Google Hybrid" : googleHybrid,
-					"Google Imagery" : googleSat
+					"Google Satellite" : googleHybrid
 				};
 
 				var controlLayers = L.control.layers(baseLayers);
