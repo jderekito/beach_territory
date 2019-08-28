@@ -180,7 +180,14 @@
                 $( "#dialog" ).dialog({
                     autoOpen: false,
                     resizable: false,
-                    modal: true,
+					modal: true,
+					draggable: false,
+					width: '40%',
+					buttons: {
+						"Close": function () {
+							$(this).dialog("close")
+						}
+					}
                 });                
    
                 var map = L.map('leafletmap', {
