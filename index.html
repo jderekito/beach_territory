@@ -10,7 +10,7 @@
         <script src="leaflet/leaflet.js"></script>
         <script src="jqueryui/jquery-ui.js"></script>
         <script src="leaflet/leaflet.js"></script>
-        <script src="leaflet/leaflet.js"></script>   
+        <script src="survey_results/seaside_results4326.json"></script>   
         <style>
             body {
               margin: 0;
@@ -131,6 +131,30 @@
 				  return response.json();
 				});
 			}
+			
+			function color(x) {
+				//This uses the conditional operator as 
+				//described here https://www.w3schools.com/js/js_comparisons.asp
+				//It is a shorthand notation for an if else statement syntax
+				//that you have likely seen before
+				return x > 3 ? '#f03b20' :
+					   x > 2 ? '#feb24c' :
+					   x > 1 ? '#fecc5c' :
+					   x > 0 ? '#ffffb2' :'#ffffff';				  
+			}
+			
+			
+			function myStyle(feature) {
+				return {
+					fillColor: color(feature.properties.metric3),
+					weight: 1,
+					opacity: 1,
+					color: '#ffffff',
+					fillOpacity: 0.50
+				};
+			}			
+			
+			var geoJsonSeasideResults = L.geoJson(seaside_json, {style: myStyle});
 		
             $(document).ready(function () {
                 //roll the credits:
@@ -175,14 +199,22 @@
 					"OpenStreetMap" : osmBasemapViewer, 
 					"Google Satellite" : googleHybrid
 				};
+				
+				var overlays = {
+					"Survey metric 3 (no trespassing signage)": geoJsonSeasideResults
+				};				
 
-				var controlLayers = L.control.layers(baseLayers);
+				var controlLayers = L.control.layers(baseLayers, overlays);
 
 				// Add the main baselayer to the map as a default (so it loads when the map
 				// is loaded
 				//fancyBasemap.addTo(map);
 				//osmBasemapViewer.addTo(map);
 				googleHybrid.addTo(map);
+				
+				
+				//add json map?
+				geoJsonSeasideResults.addTo(map)
 
 				// Add the layer selector control to the map
 				controlLayers.addTo(map);                
@@ -199,7 +231,7 @@
                       buildingLayers.clearLayers(); // remove existing markers
                       var thisLat = thisLayer.feature.geometry.coordinates[1];
                       var thisLon = thisLayer.feature.geometry.coordinates[0];
-					  map.setView([thisLat, thisLon], 16);
+					  map.setView([thisLat, thisLon], 18);
                       map.panTo([thisLat,thisLon]);
                       //thisLayer.addTo(map);
                       buildingLayers.addLayer(thisLayer);

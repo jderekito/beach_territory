@@ -27,7 +27,7 @@ var bldgData = {
 			"type" : "Feature"
 		}, {
 			"geometry" : { 
-				"coordinates" : [-86.138204, 30.319000],
+				"coordinates" : [-86.139929, 30.31972],
 				"type" : "Point"
 			},
 			"id" : "3",
@@ -39,7 +39,7 @@ var bldgData = {
 			"type" : "Feature"
 		}, {
 			"geometry" : { 
-				"coordinates" : [-86.129642, 30.316524],
+				"coordinates" : [-86.139929, 30.31972],
 				"type" : "Point"
 			},
 			"id" : "4",
