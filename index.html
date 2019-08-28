@@ -10,7 +10,7 @@
         <script src="leaflet/leaflet.js"></script>
         <script src="jqueryui/jquery-ui.js"></script>
         <script src="leaflet/leaflet.js"></script>
-        <script src="leaflet/leaflet.js"></script>       
+        <script src="leaflet/leaflet.js"></script>   
         <style>
             body {
               margin: 0;
@@ -124,9 +124,17 @@
             }
         </style>
         <script>
+			//https://github.com/Roboe
+			function fetchJSON(url) {
+			  return fetch(url)
+				.then(function(response) {
+				  return response.json();
+				});
+			}
+		
             $(document).ready(function () {
                 //roll the credits:
-				//$( "#credits_dialog" ).dialog();
+				$( "#credits_dialog" ).dialog();
 				
 				$('#toolbar .cartograpy').on('click', function() {
                   $(this).parent().toggleClass('open');
@@ -155,11 +163,6 @@
 				  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 				});
 				
-				googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
-					maxZoom: 20,
-					subdomains:['mt0','mt1','mt2','mt3']
-				});
-				
 				googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
 					maxZoom: 20,
 					subdomains:['mt0','mt1','mt2','mt3']
@@ -170,7 +173,6 @@
 				var baseLayers = {
 					"Get Fancy" : fancyBasemap,
 					"OpenStreetMap" : osmBasemapViewer, 
-					"Google Streets" : googleStreets,
 					"Google Satellite" : googleHybrid
 				};
 
@@ -258,10 +260,10 @@
 		<div id="credits_dialog" title="About">
 			<h3>This project is a UWF-based collaboration:</h3>
 			<ul style="list-style-type:disc;">
-			  <li>Jocelyn Evans</li>
-			  <li>Derek Morgan</li>
-			  <li>K Yoland</li>
-			  <li>Elizabeth Barett</li>
+			  <li>Jocelyn Evans (Political scientist)</li>
+			  <li>Derek Morgan (Geographer)</li>
+			  <li>K Yoland (Professional artist)</li>
+			  <li>Elizabeth Barett (Honors student)</li>
 			  <li>...</li>
 			  <li>...</li>
 			</ul>				
