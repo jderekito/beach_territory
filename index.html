@@ -158,7 +158,17 @@
 		
             $(document).ready(function () {
                 //roll the credits:
-				$( "#credits_dialog" ).dialog();
+				$( "#credits_dialog" ).dialog({
+						autoOpen: true,
+						modal: true,
+						draggable: false,
+						width: '40%',
+						buttons: {
+							"Close": function () {
+								$(this).dialog("close")
+							}
+						}
+				});
 				
 				$('#toolbar .cartograpy').on('click', function() {
                   $(this).parent().toggleClass('open');
